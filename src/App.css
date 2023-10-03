@@ -1,0 +1,10 @@
+.card{
+cursor: pointer;
+}
+
+.card-back:hover{
+  background-color: white;
+}
+*{
+  scroll-behavior: smooth;
+}
