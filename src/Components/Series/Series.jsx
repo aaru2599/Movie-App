@@ -2,26 +2,41 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import SingleComponent from "../SingleComponent/SingleComponent"
 import CustomPagination from "../Pagination/CustomPagination"
+import Genres from "../Genres/Genres"
+import useGenres from "../Hooks/useGenres"
 
-const Series = () => {
-    const [content, setContent] = useState([])
-    const [page, setPage] = useState(1)
-    const [numOfPage,setNumOfPage]=useState()
+const Series=()=>{
+const [page,setPage]=useState(1)
+const [content,setContent]=useState([])
+const [numOfPages,setNumOfPages]=useState()
+const [selectedGenres,setSelectedGenres]=useState([])
+const [genres,setGenres]=useState([])
+const genreForURL=useGenres(selectedGenres)
+    const fetchMovies=async()=>{
+        const {data}=await axios.get(
+            `https://api.themoviedb.org/3/discover/tv?api_key=c36a1611cce9c2fff6390d5de1cdad2f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreForURL}`
+        )
+setContent(data.results)
+console.log(data);
+setNumOfPages(data.total_pages)
+// console.log(data.total_pages);
 
-    const fetchSeries = async () => {
-        const { data } = await axios(`https://api.themoviedb.org/3/discover/tv?api_key=c36a1611cce9c2fff6390d5de1cdad2f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`)
-        setContent(data.results)
-        setNumOfPage(data.total_pages)
-        // console.log(data.total_pages);
-        // console.log(content);
     }
     useEffect(()=>{
-        fetchSeries()
-    },[page])
-    return (
-        <div className="trendings">
+        fetchMovies()
+    },[page,genreForURL])
 
-            <h4 className="text-center">{`discover series`.toUpperCase()}</h4>
+    return(
+        <div className="trendings">
+            <h3 className="text-center">{`Tv series`.toUpperCase()}</h3>
+            <Genres
+            type="tv"
+            selectedGenres={selectedGenres}
+            setSelectedGenres={setSelectedGenres}
+            genres={genres}
+            setGenres={setGenres}
+            setPage={setPage}
+            />
             <div className="container-fluid  d-flex flex-wrap  justify-content-between">
             {
                 
@@ -38,11 +53,20 @@ const Series = () => {
 
             }
         </div>
-            <CustomPagination setPage={setPage} numOfPage={numOfPage}/>
-
-
+        {
+            numOfPages>1&&
+            <CustomPagination setPage={setPage} numOfPage={numOfPages}/>
+        }
 
         </div>
+    
     )
 }
 export default Series
+
+
+// Promises
+// Web Worker
+// arvind.google.com
+// play,.google.com
+// Options & HEAD

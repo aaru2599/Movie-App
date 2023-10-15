@@ -20,7 +20,7 @@ import Header from './Components/Header/Header'
 
 
 function App() {
-
+console.log("App routed");
 
   return (
     <BrowserRouter>

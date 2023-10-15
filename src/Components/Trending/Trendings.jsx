@@ -3,11 +3,15 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import SingleComponent from "../SingleComponent/SingleComponent"
 import CustomPagination from '../Pagination/CustomPagination'
+import ShimmerEffect from '../ShimmerEffect/ShimmerEffect'
+import Loader from '../ShimmerEffect/Loader'
 const Trendings = () => {
     const [page,setPage]=useState(1)
     const [content, setContent] = useState([])
+    const [isLoading,setIsLoading]=useState(true)
     const fetchTrending = async () => {
         try {
+            setIsLoading(false)
             const response = await axios.get(
                 `https://api.themoviedb.org/3/trending/all/day?api_key=c36a1611cce9c2fff6390d5de1cdad2f&page=${page}`
             );
@@ -28,9 +32,8 @@ const Trendings = () => {
             <h4 className='text-center'>{`trendings`.toUpperCase()}</h4>
         <div className="container-fluid  d-flex flex-wrap  justify-content-between">
             {
-                
-
-                content && content.map((items) =>
+                isLoading?(<Loader/>):(
+                    content && content.map((items) =>
                     <SingleComponent key={items.id}
                         title={items.title}
                         id={items.id}
@@ -39,6 +42,10 @@ const Trendings = () => {
                         release_date={items.release_date}
                         name={items.name}
                         vote_average={items.vote_average} />)
+                )
+                
+
+                
 
             }
         </div>
