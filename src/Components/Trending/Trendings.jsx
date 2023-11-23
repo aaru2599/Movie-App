@@ -6,9 +6,9 @@ import CustomPagination from '../Pagination/CustomPagination'
 import ShimmerEffect from '../ShimmerEffect/ShimmerEffect'
 import Loader from '../ShimmerEffect/Loader'
 const Trendings = () => {
-    const [page,setPage]=useState(1)
+    const [page, setPage] = useState(1)
     const [content, setContent] = useState([])
-    const [isLoading,setIsLoading]=useState(true)
+    const [isLoading, setIsLoading] = useState(true)
     const fetchTrending = async () => {
         try {
             setIsLoading(false)
@@ -28,28 +28,28 @@ const Trendings = () => {
     }, [page])
     return (
         <div className='trendings'>
-           
+
             <h4 className='text-center'>{`trendings`.toUpperCase()}</h4>
-        <div className="container-fluid  d-flex flex-wrap  justify-content-between">
-            {
-                isLoading?(<Loader/>):(
-                    content && content.map((items) =>
-                    <SingleComponent key={items.id}
-                        title={items.title}
-                        id={items.id}
-                        media_type={items.media_type}
-                        poster_path={items.poster_path}
-                        release_date={items.release_date}
-                        name={items.name}
-                        vote_average={items.vote_average} />)
-                )
-                
+            <div className="container-fluid  d-flex flex-wrap  justify-content-between">
+                {
+                    isLoading ? (<ShimmerEffect />) : (
+                        content && content.map((items) =>
+                            <SingleComponent key={items.id}
+                                title={items.title}
+                                id={items.id}
+                                media_type={items.media_type}
+                                poster_path={items.poster_path}
+                                release_date={items.release_date}
+                                name={items.name}
+                                vote_average={items.vote_average} />)
+                    )
 
-                
 
-            }
-        </div>
-            <CustomPagination setPage={setPage} />
+
+
+                }
+            </div>
+                <CustomPagination setPage={setPage} />
 
         </div>
     )

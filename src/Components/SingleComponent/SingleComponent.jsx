@@ -3,6 +3,7 @@ import CustomPagination from "../Pagination/CustomPagination"
 import { unavailable } from "../config/Config"
 import { useState } from "react"
 import Loader from "../ShimmerEffect/Loader"
+import ShimmerEffect from "../ShimmerEffect/ShimmerEffect"
 
 
 const SingleComponent = ({
