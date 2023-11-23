@@ -9,7 +9,7 @@ window.scroll(0,0)
     return (
         <div style={{marginBottom:"60px"}} > 
         
-        <Pagination className="pagination d-flex justify-content-center bg-secondary rounded-circle p-2" 
+        <Pagination className="pagination d-flex justify-content-center bg-secondary rounded p-2" 
         
         count={numOfPage}
         onChange={(e)=>{handlePageChange(e.target.textContent)}}/>

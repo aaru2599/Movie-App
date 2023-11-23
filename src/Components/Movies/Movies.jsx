@@ -17,9 +17,8 @@ const genreForURL=useGenres(selectedGenres)
             `https://api.themoviedb.org/3/discover/movie?api_key=c36a1611cce9c2fff6390d5de1cdad2f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreForURL}`
         )
 setContent(data.results)
-console.log(data);
+
 setNumOfPages(data.total_pages)
-// console.log(data.total_pages);
 
     }
     useEffect(()=>{
