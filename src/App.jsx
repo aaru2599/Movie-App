@@ -27,7 +27,7 @@ console.log("App routed");
       <Header />
       <Container>
         <Routes>
-          <Route path='/' Component={Trendings} exact />
+          <Route path='/' Component={Trendings}  />
           <Route path='/movies' Component={Movies} />
           <Route path='/series' Component={Series} />
           <Route path='/search' Component={Search} />
